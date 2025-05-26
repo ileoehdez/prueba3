@@ -10,20 +10,44 @@ export class TaskService {
 
   constructor(private http: HttpClient) { }
 
-  getTasks(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.prueba1backUrl}/get_tareas.php`);
+  getTasks(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.prueba1backUrl}/get_tareas.php`);
   }
 
-  createTask(task: { tarea: string; tipo: string; prioridad: string, fecha_inicio: any; descripcion: string; estado: string }): Observable<any> {
-    return this.http.post<any>(`${this.prueba1backUrl}/create_tarea.php`, task);
+  createTask(tarea: string, tipo: string, prioridad: string, fecha_inicio: string, descripcion: string, estado: string): Observable<string> {
+    const creacion_tarea = {
+      tarea: tarea,
+      tipo: tipo,
+      prioridad: prioridad,
+      fecha_inicio: fecha_inicio,
+      descripcion: descripcion,
+      estado: estado
+    };
+    return this.http.post<string>(`${this.prueba1backUrl}/create_tarea.php`, creacion_tarea);
   }
 
-  updateTask(task: { tarea: string; tipo: string; prioridad: string, fecha_inicio: any; descripcion: string; estado: string }): Observable<any> {
-    return this.http.post<any>(`${this.prueba1backUrl}/update_tarea.php`, task);
+  updateTask(tarea: string, tipo: string, prioridad: string, fecha_inicio: string, descripcion: string, estado: string): Observable<string> {
+    const edicion_tarea = {
+      tarea: tarea,
+      tipo: tipo,
+      prioridad: prioridad,
+      fecha_inicio: fecha_inicio,
+      descripcion: descripcion,
+      estado: estado
+    };
+    return this.http.post<string>(`${this.prueba1backUrl}/update_tarea.php`, edicion_tarea);
   }
 
-  deleteTask(task: { tarea: string; tipo: string; prioridad: string, fecha_inicio: any; descripcion: string; estado: string }): Observable<any> {
-    return this.http.post<any>(`${this.prueba1backUrl}/delete_tarea.php`, task);
+  deleteTask(tarea: string, tipo: string, prioridad: string, fecha_inicio: string, descripcion: string, estado: string): Observable<string> {
+    const eliminacion_tarea = {
+      tarea: tarea,
+      tipo: tipo,
+      prioridad: prioridad,
+      fecha_inicio: fecha_inicio,
+      descripcion: descripcion,
+      estado: estado
+    };
+    return this.http.post<string>(`${this.prueba1backUrl}/delete_tarea.php`, eliminacion_tarea);
   }
 
 }

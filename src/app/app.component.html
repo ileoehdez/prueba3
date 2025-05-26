@@ -181,36 +181,38 @@
 
             <div class="shadow bg-light m-2 rounded">
               <div class="input-group mb-1 p-3">
-                <input type="text" class="form-control" placeholder="Titulo" id="">
-                <select class="form-select-sm" id="tipo">
-                  <option selected disabled>Tipo</option>
-                  <option value="hogar">Hogar</option>
-                  <option value="trabajo">Trabajo</option>
-                  <option value="personal">Personal</option>
+                <input type="text" class="form-control" placeholder="Titulo" name="tarea" id="tarea" [(ngModel)]="tarea" required="">
+                <select class="form-select form-select-sm" name="tipo" id="tipo" [(ngModel)]="tipo" required="">
+                  <option value="" disabled>Selecciona una opción</option>
+                  <option *ngFor="let opcion of opciones_tipo" [value]="opcion.value">{{ opcion.label }}</option>
                 </select>
-                <select class="form-select-sm" id="prioridad">
-                  <option selected disabled>Prioridad</option>
-                  <option value="baja">Baja</option>
-                  <option value="media">Media</option>
-                  <option value="alta">Alta</option>
+                <select class="form-select form-select-sm" name="prioridad" id="prioridad" [(ngModel)]="prioridad" required="">
+                  <option value="" disabled>Selecciona una opción</option>
+                  <option *ngFor="let opcion of opciones_prioridad" [value]="opcion.value">{{ opcion.label }}</option>
                 </select>
-                <input type="date" class="form-control-sm" id="fecha_inicio">
+                <input type="date" class="form-control-sm" name="fecha_inicio" id="fecha_inicio" [(ngModel)]="fecha_inicio" required="">
               </div>
               <div class="input-group mb-3 p-3">
-                <textarea class="form-control me-1" placeholder="Descripcion" id="descripcion"></textarea>
-                <button type="button" class="btn btn-lg btn-outline-success me-2" id="agregar"><i class="bi bi-plus-square-fill"></i></button>
+                <textarea class="form-control me-1" placeholder="Descripcion" name="descripcion" id="descripcion" [(ngModel)]="descripcion"></textarea>
+                <button (click)="save_task(); verificarcamposvacios()" type="button" class="btn btn-lg btn-outline-success me-2" id="agregar"><i class="bi bi-plus-square-fill"></i></button>
               </div>
             </div>
 
             <h4 class="text m-4 mt-6">TAREAS:</h4>
 
-            <div class="shadow border m-3 p-2 form-check form-switch rounded">
+            <div class="shadow border m-3 p-2 form-check rounded">
               <div class="input-group row ps-3">
-                <div class="card col-lg-9 border-0 me-2">Tarea1</div>
+                <div class="card col-lg-9 border-0 me-2">
+                  <div class="input-group mt-1 mb-1">
+                    <span class="input-group-text"><label for="estado">(estado)</label></span>
+                    <input type="text" class="form-control" name="mostrar_tarea" id="mostrar_tarea" [(ngModel)]="mostrar_tarea" disabled>
+                  </div>
+                </div>
+                <!-- <input type="radio" name="" id="" class="form-check-input m-3"> -->
                 <!-- <input type="checkbox" class="form-check-input-lg col me-2" role="switch" value="" id="estado"> -->
                 <button type="button" class="btn btn-outline-info col me-2"><i class="bi bi-ui-checks"></i></button>
-                <button type="button" class="btn btn-outline-warning col me-2"><i class="bi bi-pencil-fill"></i></button>
-                <button type="button" class="btn btn-outline-danger col me-2"><i class="bi bi-trash-fill"></i></button>
+                <button (click)="update_task()" type="button" class="btn btn-outline-warning col me-2"><i class="bi bi-pencil-fill"></i></button>
+                <button (click)="delete_task()" type="button" class="btn btn-outline-danger col me-2"><i class="bi bi-trash-fill"></i></button>
               </div>
             </div>
           </div>
